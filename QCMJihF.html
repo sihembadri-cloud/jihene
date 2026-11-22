@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QCM – Sécurité informatique</title>
+<style>
+:root{--bg:#eef5ee;--card:#fff;--tx:#18291f;--mut:#566b5d;--bd:#cfe0d2;--ac:#2e7d4f;--ac2:#1f5c39;--soft:#e2f0e5;--ok:#17803d;--okb:#dff3e5;--ko:#b42318;--kob:#fdecea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1a13;--card:#17251c;--tx:#e6f1e9;--mut:#9db5a4;--bd:#2a4132;--ac:#4fb677;--ac2:#7fd3a0;--soft:#1e3326;--ok:#5fd08a;--okb:#173a24;--ko:#ff8a7e;--kob:#3a1d1a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:22px 24px;box-shadow:0 2px 10px rgba(30,90,50,.07)}
+h1{font-size:1.8rem;margin:0 0 6px;color:var(--ac2)}.sub{color:var(--mut);margin:0 0 20px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}@media(max-width:520px){.fields{grid-template-columns:1fr}}
+label.f{font-size:.85rem;color:var(--mut);font-weight:600}
+input[type=text]{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+input[type=text]:focus{outline:2px solid var(--ac);border-color:transparent}
+.info{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 20px}.chip{background:var(--soft);color:var(--ac2);padding:6px 12px;border-radius:999px;font-weight:600;font-size:.92rem}
+.rules{color:var(--mut);margin:0 0 20px;padding-left:20px}
+button{font:inherit;font-weight:600;padding:11px 22px;border-radius:9px;border:1px solid var(--ac);background:var(--ac);color:#fff;cursor:pointer}
+button:hover{background:var(--ac2)}button.sec{background:transparent;color:var(--ac2)}button.sec:hover{background:var(--soft)}button:disabled{opacity:.4;cursor:not-allowed}
+.err{color:var(--ko);min-height:1.4em;margin:8px 0 0;font-size:.9rem}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:14px}.top progress{flex:1;height:8px;accent-color:var(--ac)}
+.top .st{color:var(--mut);font-size:.9rem;white-space:nowrap}
+#timer{font-variant-numeric:tabular-nums;font-weight:700;background:var(--soft);color:var(--ac2);padding:5px 12px;border-radius:999px}#timer.low{background:var(--kob);color:var(--ko)}
+.meta{display:flex;justify-content:space-between;color:var(--mut);font-size:.9rem;margin-bottom:8px}
+.qt{font-size:1.2rem;font-weight:600;margin:0 0 16px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--bd);border-radius:10px;margin-top:9px;cursor:pointer;background:var(--card)}
+.opt:hover{border-color:var(--ac)}.opt input{margin-top:5px;accent-color:var(--ac)}.opt.sel{background:var(--soft);border-color:var(--ac)}
+.l{font-weight:700;color:var(--ac2);min-width:1.3em}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.map{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}.map button{padding:0;width:34px;height:34px;border-radius:8px;background:var(--card);color:var(--tx);border:1px solid var(--bd);font-size:.85rem}
+.map button.ans{background:var(--soft);border-color:var(--ac)}.map button.cur{background:var(--ac);color:#fff;border-color:var(--ac)}
+.score{text-align:center}.score .big{font-size:3rem;font-weight:800;color:var(--ac2);line-height:1.1}.score .who{font-weight:600}
+.rev{margin-top:14px;border-left:5px solid var(--bd)}.rev.ok{border-left-color:var(--ok)}.rev.ko{border-left-color:var(--ko)}
+.rev h3{margin:0 0 4px;font-size:1.02rem}.rev .pts{float:right;font-weight:700}.rev.ok .pts{color:var(--ok)}.rev.ko .pts{color:var(--ko)}
+.rev .o{padding:6px 10px;border-radius:7px;margin-top:5px;border:1px solid var(--bd);font-size:.95rem}
+.rev .o.right{background:var(--okb);border-color:var(--ok)}.rev .o.wrong{background:var(--kob);border-color:var(--ko)}
+.rev .tag{font-size:.78rem;font-weight:700;margin-left:6px}
+.exp{margin-top:10px;padding:10px 12px;background:var(--bg);border-radius:8px;color:var(--mut);font-size:.93rem}.exp strong{color:var(--tx)}
+.hide{display:none!important}
+@media print{body{background:#fff;color:#000}.noprint{display:none!important}.card{box-shadow:none;break-inside:avoid}}
+</style></head><body><main>
+
+<section id="start" class="card">
+<h1>QCM – Sécurité informatique</h1><p class="sub">Hygiène numérique, cyberattaques, identité numérique, e-réputation, logiciels malveillants, authentification, mots de passe, cookies, hameçonnage</p>
+<div class="info"><span class="chip">⏱ Durée : 30 minutes</span><span class="chip">25 questions</span><span class="chip">Total : 20 points</span></div>
+<div class="fields"><label class="f">Nom<input type="text" id="nom" autocomplete="family-name"></label><label class="f">Prénom<input type="text" id="prenom" autocomplete="given-name"></label></div>
+<ul class="rules"><li>Questions 1 à 15 : <b>1 point</b> chacune.</li><li>Questions 16 à 25 : <b>0,5 point</b> chacune.</li><li>Une seule réponse est correcte par question. Aucune pénalité pour une mauvaise réponse.</li><li>Les questions et les propositions sont présentées dans un ordre aléatoire à chaque tentative.</li><li>Les réponses et le résultat s’affichent à la fin du test. Le test se termine automatiquement au bout de 30 minutes.</li></ul>
+<button id="begin">Commencer le test</button><p class="err" id="err"></p>
+</section>
+
+<section id="test" class="hide">
+<div class="top"><progress id="pg" max="25" value="0"></progress><span class="st" id="pt"></span><span id="timer">30:00</span></div>
+<div class="card">
+<div class="meta"><span id="qn"></span><span id="qp"></span></div>
+<p class="qt" id="qt"></p><div id="opts"></div>
+<div class="nav"><button class="sec" id="prev">← Précédent</button><button id="next">Suivant →</button></div>
+</div>
+<div class="map" id="map"></div>
+</section>
+
+<section id="result" class="hide">
+<div class="card score"><div class="who" id="who"></div><div class="big" id="sc"></div><div id="msg" class="sub"></div><div id="det" class="sub"></div>
+<div class="noprint"><button id="dl">Télécharger le résultat (Word)</button> <button class="sec" id="mail">Envoyer à l’enseignant</button> <button class="sec" onclick="print()">Imprimer</button><p class="sub" id="mailnote" style="margin-top:10px"></p> <button class="sec" id="again">Nouvelle tentative</button></div></div>
+<div id="rev"></div>
+</section>
+</main>
+<script>
+const Q=[{"q": "Que désigne l'« hygiène numérique » ?", "o": ["Le nettoyage physique des ordinateurs et des écrans", "L'ensemble des bonnes pratiques pour protéger ses appareils, ses comptes et ses données", "La suppression régulière de tous ses fichiers", "L'achat d'un antivirus payant"], "a": 1, "e": "L'hygiène numérique regroupe les habitudes simples (mises à jour, mots de passe solides, sauvegardes, vigilance) qui réduisent les risques informatiques."}, {"q": "Pourquoi est-il important d'installer régulièrement les mises à jour de son système et de ses applications ?", "o": ["Pour corriger des failles de sécurité exploitables par les attaquants", "Uniquement pour changer l'apparence des logiciels", "Pour libérer de l'espace disque", "Pour ne plus avoir besoin d'antivirus"], "a": 0, "e": "Les mises à jour corrigent des vulnérabilités connues. Un système non mis à jour est une cible facile."}, {"q": "Pourquoi est-il important de sauvegarder régulièrement ses données ?", "o": ["Pour accélérer le fonctionnement de l'ordinateur", "Pour empêcher les virus d'entrer dans l'appareil", "Pour pouvoir récupérer ses fichiers en cas de perte, de panne, de vol ou de cyberattaque (rançongiciel par exemple)", "Pour ne plus avoir besoin de mots de passe"], "a": 2, "e": "Une sauvegarde permet de retrouver ses données après une suppression accidentelle, une panne, un vol ou un rançongiciel. Il est conseillé de conserver plusieurs copies, sur des supports différents, dont une copie hors ligne ou hors site."}, {"q": "Quel est le principal risque lié à l'utilisation d'un Wi-Fi public non sécurisé ?", "o": ["La batterie se décharge plus vite", "L'appareil devient plus lent définitivement", "Les données échangées peuvent être interceptées par un tiers", "Aucun risque, tous les Wi-Fi sont chiffrés"], "a": 2, "e": "Sur un réseau public, un attaquant peut espionner le trafic. Un VPN et des sites en HTTPS limitent ce risque."}, {"q": "Qu'est-ce qu'une cyberattaque ?", "o": ["Une panne d'électricité qui coupe Internet", "Un acte malveillant visant à voler, altérer, bloquer ou détruire des données ou des systèmes informatiques", "Une mise à jour automatique d'un logiciel", "Un jeu vidéo en ligne très populaire"], "a": 1, "e": "Une cyberattaque est une action hostile contre un système d'information : vol de données, sabotage, extorsion, espionnage, etc."}, {"q": "Pourquoi faut-il mettre à jour régulièrement son antivirus ?", "o": ["Pour qu'il affiche moins de notifications", "Pour que sa base de signatures et ses méthodes de détection reconnaissent les nouvelles menaces", "Pour libérer de l'espace disque", "Parce qu'un antivirus à jour n'a plus besoin d'analyser les fichiers"], "a": 1, "e": "De nouveaux virus et autres logiciels malveillants apparaissent chaque jour. Un antivirus non mis à jour ne reconnaît pas les menaces récentes et protège donc mal l'appareil."}, {"q": "En quoi consiste la cybersécurité ?", "o": ["À protéger les systèmes informatiques, les réseaux et les données contre les attaques, les accès non autorisés et les pertes", "À augmenter la vitesse de connexion à Internet", "À supprimer tous les comptes en ligne d'un utilisateur", "À fabriquer des ordinateurs plus puissants"], "a": 0, "e": "La cybersécurité regroupe les moyens techniques, organisationnels et humains qui visent à garantir la confidentialité, l'intégrité et la disponibilité des systèmes et des données."}, {"q": "Qu'est-ce que l'identité numérique ?", "o": ["Uniquement le mot de passe d'un compte", "Le numéro de série de son ordinateur", "Une carte d'identité en format PDF", "L'ensemble des informations et traces qui permettent d'identifier une personne sur Internet"], "a": 3, "e": "Elle regroupe pseudo, profils, publications, données personnelles, historique, avis, etc., laissés volontairement ou non en ligne."}, {"q": "Que désigne l'e-réputation ?", "o": ["L'image et l'opinion que les autres se font d'une personne ou d'une organisation à partir de ce qui est visible sur Internet", "La vitesse de sa connexion Internet", "Le nombre d'e-mails reçus par jour", "La note donnée à un antivirus"], "a": 0, "e": "L'e-réputation se construit à partir des publications, commentaires, photos, avis et mentions qui concernent une personne en ligne."}, {"q": "Quelle pratique aide le mieux à protéger son e-réputation ?", "o": ["Publier librement tout ce qui passe par la tête", "Réfléchir avant de publier, régler la confidentialité de ses profils et surveiller ce qui est dit de soi", "Utiliser le même pseudo et la même photo partout", "Accepter toutes les demandes d'amis"], "a": 1, "e": "Ce qui est publié peut être copié, partagé et durer longtemps. Paramétrer la confidentialité et faire des recherches sur son nom permet de garder la maîtrise."}, {"q": "Qu'est-ce qu'un logiciel malveillant (malware) ?", "o": ["Un logiciel mal conçu qui plante souvent", "Un programme gratuit avec des publicités légitimes", "Un programme conçu pour nuire à un système ou aux données de l'utilisateur", "Un logiciel qui n'est pas à jour"], "a": 2, "e": "Un malware est écrit dans une intention nuisible : voler, détruire, espionner, bloquer ou détourner des ressources."}, {"q": "Quelle est la caractéristique principale d'un virus informatique ?", "o": ["Il se propage seul à travers le réseau sans aucune aide", "Il se greffe sur un fichier ou un programme hôte et se déclenche quand celui-ci est exécuté", "Il affiche uniquement des publicités", "Il ne s'attaque jamais aux fichiers"], "a": 1, "e": "Comme un virus biologique, il a besoin d'un hôte (fichier, programme) et d'une action de l'utilisateur pour s'activer et se répliquer."}, {"q": "Qu'est-ce qui distingue un ver informatique d'un virus ?", "o": ["Le ver se réplique et se propage de façon autonome via les réseaux, sans programme hôte", "Le ver est toujours inoffensif", "Le ver n'existe que sur les téléphones", "Le ver nécessite obligatoirement une clé USB"], "a": 0, "e": "Le ver exploite des failles ou des services réseau pour se copier d'une machine à l'autre automatiquement, pouvant saturer les réseaux."}, {"q": "Comment fonctionne un cheval de Troie (trojan) ?", "o": ["Il se duplique tout seul sur le réseau", "Il se cache derrière un programme d'apparence légitime pour installer une fonction malveillante", "Il chiffre uniquement les photos", "Il ne peut infecter que les serveurs"], "a": 1, "e": "Le cheval de Troie est déguisé en logiciel utile ou en fichier banal. Une fois installé, il ouvre souvent une porte dérobée à l'attaquant."}, {"q": "Que fait un rançongiciel (ransomware) ?", "o": ["Il affiche des publicités ciblées", "Il accélère l'ordinateur contre un abonnement", "Il bloque l'accès à l'appareil ou chiffre les fichiers, puis exige une rançon", "Il supprime uniquement les cookies"], "a": 2, "e": "Le rançongiciel prend les données en otage. Les autorités déconseillent de payer, car rien ne garantit la récupération des fichiers. Les sauvegardes hors ligne sont la meilleure parade."}, {"q": "Qu'est-ce qu'un logiciel publicitaire (adware) ?", "o": ["Un logiciel qui chiffre les données", "Un logiciel qui protège contre les virus", "Un logiciel qui prend le contrôle à distance de la machine", "Un logiciel qui affiche des publicités intrusives, souvent à l'insu de l'utilisateur"], "a": 3, "e": "L'adware s'installe souvent avec un logiciel gratuit et affiche pop-ups et bannières, parfois en collectant des données de navigation."}, {"q": "Quelle est la différence entre identification et authentification ?", "o": ["Il n'y a aucune différence", "L'identification, c'est prouver qui l'on est ; l'authentification, c'est dire qui l'on est", "L'identification, c'est déclarer qui l'on est (ex. un identifiant) ; l'authentification, c'est le prouver (ex. un mot de passe)", "L'authentification se fait uniquement avec un badge physique"], "a": 2, "e": "On s'identifie en annonçant son identité (nom d'utilisateur, e-mail), puis on s'authentifie en apportant la preuve (mot de passe, code, biométrie)."}, {"q": "Parmi ces mots de passe, lequel est le plus robuste ?", "o": ["123456", "MotDePasse2026", "azerty", "Une phrase de passe longue et unique, mélangeant mots, chiffres et symboles"], "a": 3, "e": "La longueur est le critère le plus important. Une phrase de passe longue, imprévisible et unique est bien plus difficile à deviner ou à casser."}, {"q": "Quel est le rôle d'un pare-feu (firewall) ?", "o": ["Il supprime automatiquement tous les virus déjà présents sur l'ordinateur", "Il filtre les connexions entrantes et sortantes selon des règles de sécurité pour bloquer le trafic non autorisé", "Il sauvegarde les fichiers de l'utilisateur dans le cloud", "Il génère des mots de passe robustes pour chaque compte"], "a": 1, "e": "Le pare-feu surveille le trafic réseau et bloque les connexions suspectes ou non autorisées. Il complète l'antivirus mais ne le remplace pas : il ne nettoie pas un appareil déjà infecté."}, {"q": "Pourquoi faut-il éviter de réutiliser le même mot de passe sur plusieurs sites ?", "o": ["Parce que les sites le refusent", "Parce que cela ralentit la connexion", "Parce que c'est interdit par la loi", "Parce qu'une fuite sur un site permet d'accéder à tous les autres comptes qui l'utilisent"], "a": 3, "e": "Les attaquants testent les identifiants volés sur d'autres services (« credential stuffing »). Un mot de passe unique par compte limite les dégâts."}, {"q": "Qu'est-ce qu'un cookie sur Internet ?", "o": ["Un virus qui se cache dans les navigateurs", "Un petit fichier déposé par un site sur votre appareil pour mémoriser des informations (session, préférences, suivi)", "Un type de mot de passe", "Une extension qui bloque les publicités"], "a": 1, "e": "Les cookies servent à garder une session ouverte, mémoriser un panier ou des préférences, mais aussi à suivre la navigation à des fins publicitaires (cookies tiers)."}, {"q": "Qu'est-ce que l'usurpation d'identité ?", "o": ["Changer volontairement de pseudo sur un forum", "Utiliser un pseudonyme dans un jeu vidéo", "Utiliser frauduleusement les informations personnelles de quelqu'un pour se faire passer pour lui", "Créer un deuxième compte pour soi-même"], "a": 2, "e": "Les fraudeurs utilisent nom, photos, coordonnées ou identifiants volés pour ouvrir des comptes, contracter des crédits ou escroquer des proches."}, {"q": "Qu'est-ce que l'hameçonnage (phishing) ?", "o": ["Une technique qui consiste à se faire passer pour un organisme de confiance afin de pousser la victime à divulguer ses données", "Une méthode de sauvegarde automatique", "Un type de pare-feu", "Un protocole de chiffrement des e-mails"], "a": 0, "e": "Par e-mail, SMS, appel ou faux site, l'attaquant imite une banque, un service public ou un fournisseur pour voler identifiants, codes ou données bancaires."}, {"q": "En quoi consiste l'authentification multifacteur (MFA) ?", "o": ["Utiliser un mot de passe très long", "Changer de mot de passe chaque jour", "Se connecter sur plusieurs appareils en même temps", "Combiner plusieurs preuves d'identité de natures différentes : ce que l'on sait, ce que l'on possède, ce que l'on est"], "a": 3, "e": "Mot de passe (ce que je sais) + téléphone ou clé de sécurité (ce que je possède) + empreinte ou visage (ce que je suis). Même si le mot de passe est volé, le compte reste protégé."}, {"q": "Vous recevez un e-mail de votre « banque » vous demandant de cliquer sur un lien pour « éviter la fermeture de votre compte sous 24 h ». Que faites-vous ?", "o": ["Je clique vite sur le lien pour éviter la fermeture", "Je ne clique pas, je vérifie l'adresse de l'expéditeur et du lien, et je contacte ma banque par son site ou son numéro officiel", "Je réponds en envoyant mes identifiants pour confirmer", "Je transfère le message à tous mes contacts pour les prévenir"], "a": 1, "e": "Urgence, menace, fautes, adresse d'expéditeur douteuse ou lien qui ne mène pas au site officiel sont des signaux d'alerte. Il faut toujours passer par le site officiel ou signaler le message (ex. signal-spam.fr ou 33700 pour les SMS en France)."}],L="ABCD",DUR=30*60,$=id=>document.getElementById(id);
+const pts=i=>i<15?1:.5,fmt=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:1});
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let T,cur,tm,left,fin;
+function begin(){
+ if(!$('nom').value.trim()||!$('prenom').value.trim()){$('err').textContent='Veuillez renseigner votre nom et votre prénom.';return}
+ $('err').textContent='';
+ T=shuf(Q.map((q,i)=>i)).map(i=>({i,order:shuf([0,1,2,3]),ans:null}));
+ cur=0;fin=false;left=DUR;
+ $('start').classList.add('hide');$('result').classList.add('hide');$('test').classList.remove('hide');
+ $('map').innerHTML=T.map((_,k)=>`<button data-k="${k}">${k+1}</button>`).join('');
+ clearInterval(tm);tick();tm=setInterval(()=>{left--;tick();if(left<=0)finish(true)},1000);
+ show();scrollTo(0,0)}
+function tick(){const m=Math.floor(left/60),s=left%60;$('timer').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;$('timer').classList.toggle('low',left<=300)}
+function show(){
+ const t=T[cur],q=Q[t.i];
+ $('qn').textContent=`Question ${cur+1} sur 25`;$('qp').textContent=fmt(pts(t.i))+(pts(t.i)>1?' point':' point')+'';
+ $('qt').textContent=q.q;
+ $('opts').innerHTML=t.order.map((o,k)=>`<label class="opt ${t.ans===o?'sel':''}"><input type="radio" name="r" value="${o}" ${t.ans===o?'checked':''}><span class="l">${L[k]}.</span><span>${q.o[o]}</span></label>`).join('');
+ const last=cur===24;$('prev').disabled=cur===0;$('next').textContent=last?'Terminer le test ✓':'Suivant →';
+ const n=T.filter(x=>x.ans!==null).length;$('pg').value=n;$('pt').textContent=n+' / 25 répondues';
+ document.querySelectorAll('#map button').forEach((b,k)=>{b.className=(k===cur?'cur ':'')+(T[k].ans!==null?'ans':'')})}
+$('opts').addEventListener('change',e=>{T[cur].ans=+e.target.value;show()});
+$('prev').onclick=()=>{cur--;show()};
+$('next').onclick=()=>{if(cur<24){cur++;show()}else{const m=T.filter(x=>x.ans===null).length;if(!m||confirm(`Il reste ${m} question(s) sans réponse. Terminer quand même ?`))finish(false)}};
+$('map').addEventListener('click',e=>{if(e.target.dataset.k){cur=+e.target.dataset.k;show()}});
+function finish(auto){
+ if(fin)return;fin=true;clearInterval(tm);
+ let s=0,ok=0;
+ const rv=T.map((t,k)=>{const q=Q[t.i],p=pts(t.i),good=t.ans===q.a;if(good){s+=p;ok++}
+  return `<div class="card rev ${good?'ok':'ko'}"><h3><span class="pts">${good?'+':''}${fmt(good?p:0)} / ${fmt(p)}</span>${k+1}. ${q.q}</h3>`+
+  t.order.map((o,j)=>{const r=o===q.a,w=o===t.ans&&!r;return `<div class="o ${r?'right':w?'wrong':''}"><b>${L[j]}.</b> ${q.o[o]}${r?'<span class="tag">✔ Bonne réponse</span>':''}${w?'<span class="tag">✘ Votre réponse</span>':''}</div>`}).join('')+
+  (t.ans===null?'<div class="exp">Pas de réponse.</div>':'')+`<div class="exp"><strong>Explication.</strong> ${q.e}</div></div>`}).join('');
+ $('who').textContent=`${$('prenom').value.trim()} ${$('nom').value.trim().toUpperCase()}`;
+ $('sc').textContent=`${fmt(s)} / 20`;
+ $('det').textContent=`${ok} bonne(s) réponse(s) sur 25`+(auto?' · temps écoulé':` · temps utilisé : ${Math.floor((DUR-left)/60)} min ${(DUR-left)%60} s`);
+ $('msg').textContent=s>=16?'Excellent travail !':s>=12?'Bon résultat, quelques points à revoir.':s>=10?'Résultat moyen : relisez les explications.':'À retravailler : relisez attentivement les explications.';
+ REP={who:$('who').textContent,date:new Date().toLocaleString('fr-FR'),time:`${Math.floor((DUR-left)/60)} min ${(DUR-left)%60} s`+(auto?' (temps écoulé)':''),score:fmt(s),ok,
+  items:T.map(t=>{const q=Q[t.i],g=t.ans===q.a;return{q:q.q,p:fmt(pts(t.i)),got:fmt(g?pts(t.i):0),good:g,ans:t.ans===null?'(aucune réponse)':q.o[t.ans],right:q.o[q.a],e:q.e}})};
+ $('mailnote').textContent='';$('rev').innerHTML=rv;$('test').classList.add('hide');$('result').classList.remove('hide');scrollTo(0,0)}
+$('begin').onclick=begin;
+$('again').onclick=()=>{$('result').classList.add('hide');$('start').classList.remove('hide');scrollTo(0,0)};
+
+/* ===== Export Word (.docx) + e-mail ===== */
+const TO="enseignant.cii@gmail.com";let REP=null;
+const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const crcT=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc=b=>{let c=~0;for(const x of b)c=crcT[(c^x)&255]^(c>>>8);return ~c>>>0};
+function zip(files){const e=new TextEncoder(),parts=[],cd=[];let off=0;
+ const u16=v=>[v&255,v>>8&255],u32=v=>[v&255,v>>8&255,v>>16&255,v>>24&255];
+ for(const[n,t]of files){const nb=e.encode(n),d=e.encode(t),c=crc(d);
+  const h=new Uint8Array([0x50,0x4b,3,4,20,0,0,8,0,0,0,0,0,0,...u32(c),...u32(d.length),...u32(d.length),...u16(nb.length),0,0]);
+  parts.push(h,nb,d);
+  cd.push(new Uint8Array([0x50,0x4b,1,2,20,0,20,0,0,8,0,0,0,0,0,0,...u32(c),...u32(d.length),...u32(d.length),...u16(nb.length),0,0,0,0,0,0,0,0,0,0,0,0,...u32(off)]),nb);
+  off+=h.length+nb.length+d.length}
+ const cs=cd.reduce((a,x)=>a+x.length,0);
+ return new Blob([...parts,...cd,new Uint8Array([0x50,0x4b,5,6,0,0,0,0,...u16(files.length),...u16(files.length),...u32(cs),...u32(off),0,0])],{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})}
+const run=(t,o={})=>`<w:r><w:rPr>${o.b?'<w:b/>':''}${o.c?`<w:color w:val="${o.c}"/>`:''}${o.sz?`<w:sz w:val="${o.sz}"/>`:''}</w:rPr><w:t xml:space="preserve">${esc(t)}</w:t></w:r>`;
+const para=(runs,o={})=>`<w:p><w:pPr>${o.center?'<w:jc w:val="center"/>':''}<w:spacing w:before="${o.before||0}" w:after="${o.after||80}"/></w:pPr>${runs}</w:p>`;
+function buildDocx(r){
+ let b=para(run('QCM – Sécurité informatique',{b:1,sz:36,c:'1F5C39'}),{center:1,after:200})+
+ para(run('Étudiant : ',{b:1})+run(r.who))+para(run('Date : ',{b:1})+run(r.date))+para(run('Durée utilisée : ',{b:1})+run(r.time))+
+ para(run('Note : ',{b:1,sz:28})+run(`${r.score} / 20`,{b:1,sz:28,c:'2E7D4F'}),{before:120})+para(run(`${r.ok} bonne(s) réponse(s) sur 25`),{after:240});
+ r.items.forEach((x,k)=>{const c=x.good?'17803D':'B42318';
+  b+=para(run(`${k+1}. ${x.q}`,{b:1})+run(`   [${x.got} / ${x.p} pt]`,{b:1,c}),{before:160,after:40})+
+  para(run('Réponse de l’étudiant : ',{b:1})+run(x.ans,{c}),{after:20})+
+  (x.good?'':para(run('Bonne réponse : ',{b:1})+run(x.right,{c:'17803D'}),{after:20}))+
+  para(run('Explication : ',{b:1})+run(x.e,{c:'566B5D'}),{after:80})});
+ const doc=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${b}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+ return zip([['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>'],
+ ['_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
+ ['word/document.xml',doc]])}
+const fname=()=>(($('nom').value.trim()+'_'+$('prenom').value.trim()).replace(/[\\/:*?"<>|\s]+/g,'_')||'resultat')+'.docx';
+function download(){const bl=buildDocx(REP),a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=fname();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
+$('dl').onclick=download;
+$('mail').onclick=()=>{download();
+ const sub=`QCM Sécurité – ${REP.who} – ${REP.score}/20`,body=`Bonjour,\n\nRésultat du QCM Sécurité informatique\nÉtudiant : ${REP.who}\nDate : ${REP.date}\nNote : ${REP.score} / 20 (${REP.ok} bonnes réponses sur 25)\nDurée : ${REP.time}\n\nLe détail complet est dans le fichier Word joint : ${fname()}\n`;
+ $('mailnote').textContent=`Le fichier ${fname()} vient d’être téléchargé. Votre messagerie s’ouvre : joignez-y ce fichier avant d’envoyer.`;
+ location.href=`mailto:${TO}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`};
+</script></body></html>
